@@ -24,5 +24,5 @@ module maze_top(
 
     //Instantiate modules
     display_controller dc(.clk(ClkPort), .hSync(hSync), .vSync(vSync), .bright(bright), .hCount(hc), .vCount(vc));
-    
+endmodule
 

@@ -24,7 +24,7 @@ module display_controller (
     always @(posedge clk25)
     begin 
         if (hCount < 10'd799)
-            hCount <= hCount + 1
+            hCount <= hCount + 1;
         else if (vCount < 10'd524)
             begin
                 hCount <= 0;
