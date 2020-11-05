@@ -45,7 +45,7 @@ module maze_controller(
             rgb = WHITE;
     end
 
-    assign in_maze = hCount > 10'd389 && hCount < 10'd539 && vCount > 10'd200 && vCount < 10'd350;
+    assign in_maze = hCount > 10'd314 && hCount < 10'd614 && vCount > 10'd125 && vCount < 10'd425;
 
 endmodule
 
