@@ -7,21 +7,8 @@ module display_controller (
         output reg [9:0] hCount,
         output reg [9:0] vCount
     );
-
-    reg pulse;
-    reg clk25;
-
-    initial begin
-        clk25 = 0;
-        pulse = 0;
-    end
-
-    always @(posedge clk)
-        pulse = ~pulse;
-    always @(posedge pulse)
-        clk25 = ~clk25;
     
-    always @(posedge clk25)
+    always @(posedge clk)
     begin 
         if (hCount < 10'd799)
             hCount <= hCount + 1;
@@ -40,7 +27,7 @@ module display_controller (
     assign hSync = (hCount < 96) ? 0:1;
     assign vSync = (vCount < 2) ? 0:1;
 
-    always @(posedge clk25)
+    always @(posedge clk)
 	begin
 		if(hCount > 10'd143 && hCount < 10'd784 && vCount > 10'd34 && vCount < 10'd516)
 			bright <= 1;

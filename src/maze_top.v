@@ -22,9 +22,24 @@ module maze_top(
     //disable memory ports
     assign {MemOE, MemWR, RamCS, QuadSpiFlashCS} = 4'b1111;
 
+    //create clk25
+    reg pulse;
+    reg clk25;
+
+    always @(posedge ClkPort)
+        pulse = ~pulse;
+    always @(posedge pulse)
+        clk25 = ~clk25;
+
     //Instantiate modules
-    display_controller dc(.clk(ClkPort), .hSync(hSync), .vSync(vSync), .bright(bright), .hCount(hc), .vCount(vc));
-    maze_controller mc(.clk(ClkPort), .bright(bright), .hCount(hc), .vCount(vc), .rgb(rgb));
+    display_controller dc(.clk(clk25), .hSync(hSync), .vSync(vSync), .bright(bright), .hCount(hc), .vCount(vc));
+    maze_controller mc(.clk(clk25), .bright(bright), .hCount(hc), .vCount(vc), .rgb(rgb));
+
+    //itialize
+    initial begin
+        clk25 = 0;
+        pulse = 0;    
+    end
 
 endmodule
 
