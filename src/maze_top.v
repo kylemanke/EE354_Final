@@ -6,7 +6,12 @@ module maze_top(
         output hSync, vSync,
         output [3:0] vgaR, vgaG, vgaB,
         // Book Keeping
-        output MemOE, MemWR, RamCS, QuadSpiFlashCS
+        output MemOE, MemWR, RamCS, QuadSpiFlashCS,
+        // For movement
+        input BtnC, BtnL, BtnR, BtnD, BtnU,
+        // SSDs
+        output Ca, Cb, Cc, Cd, Ce, Cf, Cg, Dp,
+        output An0
     );
 
     //VGA Declarations
@@ -18,6 +23,9 @@ module maze_top(
     assign vgaR = rgb[11:8];
     assign vgaG = rgb[7:4];
     assign vgaB = rgb[3:0];
+
+    // For the Score
+    wire [3:0] score;
 
     //disable memory ports
     assign {MemOE, MemWR, RamCS, QuadSpiFlashCS} = 4'b1111;
@@ -33,7 +41,7 @@ module maze_top(
 
     //Instantiate modules
     display_controller dc(.clk(clk25), .hSync(hSync), .vSync(vSync), .bright(bright), .hCount(hc), .vCount(vc));
-    maze_controller mc(.clk(clk25), .bright(bright), .hCount(hc), .vCount(vc), .rgb(rgb));
+    maze_controller mc(.clk(clk25), .bright(bright), .hCount(hc), .vCount(vc), .rgb(rgb), .Right(BtnR), .Left(BtnL), .Reset(BtnC), .Up(BtnU), .Down(BtnD), .score(score));
 
     //itialize
     initial begin

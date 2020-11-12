@@ -138,34 +138,34 @@ set_property PACKAGE_PIN E3 [get_ports ClkPort]
 
 #7 segment display
 #Bank = 34, Pin name = IO_L2N_T0_34,						Sch name = Ca
-#set_property PACKAGE_PIN L3 [get_ports {Ca}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {Ca}]
+set_property PACKAGE_PIN L3 [get_ports {Ca}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {Ca}]
 #Bank = 34, Pin name = IO_L3N_T0_DQS_34,					Sch name = Cb
-#set_property PACKAGE_PIN N1 [get_ports {Cb}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {Cb}]
+set_property PACKAGE_PIN N1 [get_ports {Cb}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {Cb}]
 #Bank = 34, Pin name = IO_L6N_T0_VREF_34,					Sch name = Cc
-#set_property PACKAGE_PIN L5 [get_ports {Cc}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {Cc}]
+set_property PACKAGE_PIN L5 [get_ports {Cc}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {Cc}]
 #Bank = 34, Pin name = IO_L5N_T0_34,						Sch name = Cd
-#set_property PACKAGE_PIN L4 [get_ports {Cd}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {Cd}]
+set_property PACKAGE_PIN L4 [get_ports {Cd}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {Cd}]
 #Bank = 34, Pin name = IO_L2P_T0_34,						Sch name = Ce
-#set_property PACKAGE_PIN K3 [get_ports {Ce}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {Ce}]
+set_property PACKAGE_PIN K3 [get_ports {Ce}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {Ce}]
 #Bank = 34, Pin name = IO_L4N_T0_34,						Sch name = Cf
-#set_property PACKAGE_PIN M2 [get_ports {Cf}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {Cf}]
+set_property PACKAGE_PIN M2 [get_ports {Cf}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {Cf}]
 #Bank = 34, Pin name = IO_L6P_T0_34,						Sch name = Cg
-#set_property PACKAGE_PIN L6 [get_ports {Cg}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {Cg}]
+set_property PACKAGE_PIN L6 [get_ports {Cg}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {Cg}]
 
 #Bank = 34, Pin name = IO_L16P_T2_34,						Sch name = Dp
-#set_property PACKAGE_PIN M4 [get_ports Dp]							
-#	set_property IOSTANDARD LVCMOS33 [get_ports Dp]
+set_property PACKAGE_PIN M4 [get_ports Dp]							
+	set_property IOSTANDARD LVCMOS33 [get_ports Dp]
 
 #Bank = 34, Pin name = IO_L18N_T2_34,						Sch name = An0
-#set_property PACKAGE_PIN N6 [get_ports {An0}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {An0}]
+set_property PACKAGE_PIN N6 [get_ports {An0}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {An0}]
 #Bank = 34, Pin name = IO_L18P_T2_34,						Sch name = An1
 #set_property PACKAGE_PIN M6 [get_ports {An1}]					
 #	set_property IOSTANDARD LVCMOS33 [get_ports {An1}]
@@ -195,20 +195,20 @@ set_property PACKAGE_PIN E3 [get_ports ClkPort]
 #set_property PACKAGE_PIN C12 [get_ports btnCpuReset]				
 #	set_property IOSTANDARD LVCMOS33 [get_ports btnCpuReset]
 # Bank = 15, Pin name = IO_L11N_T1_SRCC_15,					Sch name = BTNC
-#set_property PACKAGE_PIN E16 [get_ports BtnC]						
-#	set_property IOSTANDARD LVCMOS33 [get_ports BtnC]
+set_property PACKAGE_PIN E16 [get_ports BtnC]						
+	set_property IOSTANDARD LVCMOS33 [get_ports BtnC]
 #Bank = 15, Pin name = IO_L14P_T2_SRCC_15,					Sch name = BTNU
-#set_property PACKAGE_PIN F15 [get_ports BtnU]						
-#	set_property IOSTANDARD LVCMOS33 [get_ports BtnU]
+set_property PACKAGE_PIN F15 [get_ports BtnU]						
+	set_property IOSTANDARD LVCMOS33 [get_ports BtnU]
 #Bank = CONFIG, Pin name = IO_L15N_T2_DQS_DOUT_CSO_B_14,	Sch name = BTNL
-#set_property PACKAGE_PIN T16 [get_ports BtnL]						
-#	set_property IOSTANDARD LVCMOS33 [get_ports BtnL]
+set_property PACKAGE_PIN T16 [get_ports BtnL]						
+	set_property IOSTANDARD LVCMOS33 [get_ports BtnL]
 #Bank = 14, Pin name = IO_25_14,							Sch name = BTNR
-#set_property PACKAGE_PIN R10 [get_ports BtnR]						
-#	set_property IOSTANDARD LVCMOS33 [get_ports BtnR]
+set_property PACKAGE_PIN R10 [get_ports BtnR]						
+	set_property IOSTANDARD LVCMOS33 [get_ports BtnR]
 #Bank = 14, Pin name = IO_L21P_T3_DQS_14,					Sch name = BTND
-#set_property PACKAGE_PIN V10 [get_ports BtnD]						
-#	set_property IOSTANDARD LVCMOS33 [get_ports BtnD]
+set_property PACKAGE_PIN V10 [get_ports BtnD]						
+	set_property IOSTANDARD LVCMOS33 [get_ports BtnD]
  
 
 

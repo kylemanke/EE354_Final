@@ -3,6 +3,8 @@
 module maze_controller(
         input clk, 
         input bright,
+        input Up, Down, Left, Right, Reset,
+        output score,
         input [9:0] hCount, vCount,
         output reg [11:0] rgb
     );
@@ -18,10 +20,12 @@ module maze_controller(
     parameter RED = 12'b1111_0000_0000;
 
 
-    // registers to keep track of location
+    // registers to keep track of maze location
     reg [3:0] main_row;
     reg [4:0] mini_row, mini_col; 
     reg [5:0] main_col;
+
+    // registers to keep track of block location
 
     // maze registers
     reg [59:0] maze [0:14];
