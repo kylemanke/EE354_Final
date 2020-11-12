@@ -8,10 +8,15 @@ module maze_controller(
     );
 
     wire in_maze;
+    wire print_start;
+    wire print_finish;
 
     // declare Black and White
     parameter BLACK = 12'b0000_0000_0000;
     parameter WHITE = 12'b1111_1111_1111;
+    parameter GREEN = 12'b0000_1111_0000;
+    parameter RED = 12'b1111_0000_0000;
+
 
     // registers to keep track of location
     reg [3:0] main_row;
@@ -53,6 +58,10 @@ module maze_controller(
         else if(in_maze)
         begin
             rgb = WHITE; // let this be overwritten if a wall
+            if (print_start)
+                rgb = GREEN;
+            else if (print_finish)
+                rgb = RED;
             if (mini_row < 5'b00101 && maze[main_row][main_col] == 1'b1)
                 rgb = BLACK;
             else if (mini_row > 5'b01110 && maze[main_row][main_col - 2] == 1'b1)
@@ -87,5 +96,8 @@ module maze_controller(
     end
 
     assign in_maze = hCount >= 10'd314 && hCount < 10'd614 && vCount >= 10'd125 && vCount < 10'd425;
+    assign print_start = hCount >= 10'd314 && hCount < 10'd334 && vCount >= 10'd405 && vCount < 10'd425;
+    assign print_finish = hCount >= 10'd594 && hCount < 10'd614 && vCount >= 10'd125 && vCount < 10'd145;
+    
 
 endmodule    
