@@ -167,26 +167,26 @@ set_property PACKAGE_PIN M4 [get_ports Dp]
 set_property PACKAGE_PIN N6 [get_ports {An0}]					
 	set_property IOSTANDARD LVCMOS33 [get_ports {An0}]
 #Bank = 34, Pin name = IO_L18P_T2_34,						Sch name = An1
-#set_property PACKAGE_PIN M6 [get_ports {An1}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {An1}]
+set_property PACKAGE_PIN M6 [get_ports {An1}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {An1}]
 #Bank = 34, Pin name = IO_L4P_T0_34,						Sch name = An2
-#set_property PACKAGE_PIN M3 [get_ports {An2}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {An2}]
+set_property PACKAGE_PIN M3 [get_ports {An2}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {An2}]
 #Bank = 34, Pin name = IO_L13_T2_MRCC_34,					Sch name = An3
-#set_property PACKAGE_PIN N5 [get_ports {An3}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {An3}]
+set_property PACKAGE_PIN N5 [get_ports {An3}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {An3}]
 #Bank = 34, Pin name = IO_L3P_T0_DQS_34,					Sch name = An4
-#set_property PACKAGE_PIN N2 [get_ports {An4}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {An4}]
+set_property PACKAGE_PIN N2 [get_ports {An4}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {An4}]
 #Bank = 34, Pin name = IO_L16N_T2_34,						Sch name = An5
-#set_property PACKAGE_PIN N4 [get_ports {An5}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {An5}]
+set_property PACKAGE_PIN N4 [get_ports {An5}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {An5}]
 #Bank = 34, Pin name = IO_L1P_T0_34,						Sch name = An6
-#set_property PACKAGE_PIN L1 [get_ports {An6}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {An6}]
+set_property PACKAGE_PIN L1 [get_ports {An6}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {An6}]
 #Bank = 34, Pin name = IO_L1N_T034,							Sch name = An7
-#set_property PACKAGE_PIN M1 [get_ports {An7}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {An7}]
+set_property PACKAGE_PIN M1 [get_ports {An7}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {An7}]
 
 
 
