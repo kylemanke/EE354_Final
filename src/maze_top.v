@@ -30,6 +30,7 @@ module maze_top(
 
     // For the Score
     wire [3:0] score;
+    wire [7:0] death_count;
 
     //SSD Declarations
     reg [3:0] SSD;
@@ -51,7 +52,7 @@ module maze_top(
     end
 
     wire move_clk;
-	assign move_clk=DIV_CLK[19];
+	assign move_clk=DIV_CLK[20];
 
     //create clk25
     reg pulse;
@@ -64,7 +65,7 @@ module maze_top(
 
     //Instantiate modules
     display_controller dc(.clk(clk25), .hSync(hSync), .vSync(vSync), .bright(bright), .hCount(hc), .vCount(vc));
-    maze_controller mc(.clk(clk25), .move_clk(move_clk), .bright(bright), .hCount(hc), .vCount(vc), .rgb(rgb), .Right(BtnR), .Left(BtnL), .Reset(Reset), .Up(BtnU), .Down(BtnD), .score(score));
+    maze_controller mc(.clk(clk25), .move_clk(move_clk), .bright(bright), .hCount(hc), .vCount(vc), .rgb(rgb), .Right(BtnR), .Left(BtnL), .Reset(Reset), .Up(BtnU), .Down(BtnD), .score(score), .death_count(death_count));
 
     //itialize
     initial begin
@@ -73,24 +74,22 @@ module maze_top(
     end
 
     // SSD Leg Work
-    assign SSD3 = 4'b0000;
-    assign SSD2 = 4'b0000;
-    assign SSD1 = 4'b0000;
+    assign SSD3 = death_count[7:4];
+    assign SSD2 = death_count[3:0];
     assign SSD0 = score;
     assign {Ca, Cb, Cc, Cd, Ce, Cf, Cg, Dp} = {SSD_CATHODES};
 
     assign ssdscan_clk = DIV_CLK[19:18];
-    assign An0	= !(~(ssdscan_clk[1]) && ~(ssdscan_clk[0]));  
-	assign An1	= !(~(ssdscan_clk[1]) &&  (ssdscan_clk[0]));  
+    assign An0	= ssdscan_clk[1]; 
 	assign An2	=  !((ssdscan_clk[1]) && ~(ssdscan_clk[0])); 
 	assign An3	=  !((ssdscan_clk[1]) &&  (ssdscan_clk[0])); 
-    assign {An7, An6, An5, An4} = 4'b1111; 
+    assign {An7, An6, An5, An4, An1} = 5'b11111; 
 
     always @(ssdscan_clk, SSD0, SSD1, SSD2, SSD3)
     begin : SSD_SCAN_OUT
         case (ssdscan_clk)
             2'b00: SSD = SSD0;
-            2'b01: SSD = SSD1;
+            2'b01: SSD = SSD0;
             2'b10: SSD = SSD2;
             2'b11: SSD = SSD3;
         endcase

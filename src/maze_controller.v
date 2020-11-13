@@ -6,6 +6,7 @@ module maze_controller(
         input bright,
         input Up, Down, Left, Right, Reset,
         output reg [3:0] score,
+        output [7:0] death_count,
         input [9:0] hCount, vCount,
         output reg [11:0] rgb
     );
@@ -31,6 +32,11 @@ module maze_controller(
     INI = 3'b001,
     PLAY = 3'b010,
     DONE = 3'b100;
+
+    //For deathcount
+    reg [3:0] death_count_0;
+    reg [3:0] death_count_1;
+    assign death_count = {death_count_1, death_count_0};
 
     // registers to keep track of maze location
     reg [3:0] main_row;
@@ -82,12 +88,12 @@ module maze_controller(
         //initialize different coin positions
         xcoin[0] = 380;
         xcoin[1] = 400;
-        xcoin[2] = 520;//
-        xcoin[3] = 472;//
-        ycoin[0] = 140;
+        xcoin[2] = 460;//
+        xcoin[3] = 605;//
+        ycoin[0] = 135;
         ycoin[1] = 275;
-        ycoin[2] = 415;//
-        ycoin[3] = 292;//
+        ycoin[2] = 375;//
+        ycoin[3] = 275;//
     end
 
     // print maze
@@ -160,6 +166,8 @@ module maze_controller(
             ycoin_pos <= 10'bXXXXXXXXXX;
             background <= 12'bXXXXXXXXXXXX;
             score <= 4'bXXXX;
+            death_count_0 <= 4'bXXXX;
+            death_count_1 <= 4'bXXXX;
             coin_flag <= 1'bX;
         end
         else
@@ -174,9 +182,11 @@ module maze_controller(
                     ycheck <= 415;
                     xpos <= 324;
                     ypos <= 415;
-                    xcoin_pos <= 350;
-                    ycoin_pos <= 250;
+                    xcoin_pos <= 464;
+                    ycoin_pos <= 315;
                     coin_flag <= 0;
+                    death_count_0 <= 0;
+                    death_count_1 <= 0;
                     score <= 0; //might not use for multiple coins because more than one coin actually complicates it more than I thought
                 end             
                 PLAY:
@@ -200,16 +210,24 @@ module maze_controller(
                             xpos <= xcheck;
                             ypos <= ycheck;
                             wall_flag_sm <= 1;
+                            death_count_0 <= death_count_0 + 1;
+                            if (death_count_0 == 9)
+                            begin
+                                death_count_0 <= 0;
+                                death_count_1 <= death_count_1 + 1;
+                                if(death_count_1 == 9)
+                                    death_count_1 <= 0;
+                            end
                         end
                     //check for wall_flag_vga 
                     if (~wall_flag_vga)
                         wall_flag_sm <= 0;
-                    if (block_fill && coin)
+                    if (ypos >= (ycoin_pos-2) && ypos <= (ycoin_pos+2) && xpos >= (xcoin_pos-2) && xpos <= (xcoin_pos+2) && coin_flag != 1)
                     begin
                         score <= score + 1;
                         xcheck <= xcoin_pos;
                         ycheck <= ycoin_pos;
-                        if (score < 5)
+                        if (score < 4)
                         begin
                             xcoin_pos <= xcoin[score];
                             ycoin_pos <= ycoin[score];
@@ -217,7 +235,7 @@ module maze_controller(
                         else
                             coin_flag <= 1;
                     end
-                    if (block_fill && print_finish && coin_flag == 1)
+                    if (xpos >= 10'd594 && xpos < 10'd614 && ypos >= 10'd125 && ypos < 10'd145 && coin_flag == 1)
                         state <= DONE;
                 end 
                 DONE:
