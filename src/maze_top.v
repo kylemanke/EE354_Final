@@ -50,6 +50,9 @@ module maze_top(
             DIV_CLK <= DIV_CLK + 1'b1;
     end
 
+    wire move_clk;
+	assign move_clk=DIV_CLK[19];
+
     //create clk25
     reg pulse;
     reg clk25;
@@ -61,7 +64,7 @@ module maze_top(
 
     //Instantiate modules
     display_controller dc(.clk(clk25), .hSync(hSync), .vSync(vSync), .bright(bright), .hCount(hc), .vCount(vc));
-    maze_controller mc(.clk(clk25), .bright(bright), .hCount(hc), .vCount(vc), .rgb(rgb), .Right(BtnR), .Left(BtnL), .Reset(Reset), .Up(BtnU), .Down(BtnD), .score(score));
+    maze_controller mc(.move_clk(move_clk), .bright(bright), .hCount(hc), .vCount(vc), .rgb(rgb), .Right(BtnR), .Left(BtnL), .Reset(Reset), .Up(BtnU), .Down(BtnD), .score(score));
 
     //itialize
     initial begin
