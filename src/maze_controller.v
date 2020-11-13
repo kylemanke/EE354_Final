@@ -44,7 +44,8 @@ module maze_controller(
     reg [9:0] xcoin [0:3];
     reg [9:0] ycoin [0:3];
     reg coin_flag;
-    reg wall_flag;
+    reg wall_flag_vga;
+    reg wall_flag_sm;
 
     //register for states
     reg [2:0] state;
@@ -54,7 +55,8 @@ module maze_controller(
 
     initial begin
         background = RED;
-        wall_flag = 0;
+        wall_flag_vga = 0;
+        wall_flag_sm = 0;
         coin_flag = 0;
         //initialize counters
         main_row = 4'b0000;
@@ -96,17 +98,20 @@ module maze_controller(
         
         else if(in_maze)
         begin
+            // check for wall flag
+            if (wall_flag_sm == 1'b1)
+                wall_flag_vga = 1'b0;
             rgb = WHITE; // let this be overwritten if a wall
             if (block_fill)
             begin
                 if (wall)
-                    wall_flag = 1;
+                    wall_flag_vga = 1;
                 rgb = BLUE;
             end
             else if (coin)
             begin
                 if (coin_flag == 1)
-                    rgb <= WHITE;
+                    rgb = WHITE;
                 else
                     rgb = GOLD;
             end
@@ -114,7 +119,7 @@ module maze_controller(
                 rgb = RED;
             else if (print_finish)
                 rgb = GREEN;
-            if (wall)
+            if (wall && ~coin)
                 rgb = BLACK;
             mini_col <= mini_col + 1;
             if (mini_col == 5'b10011)
@@ -178,24 +183,27 @@ module maze_controller(
                 begin
                     if(Right) 
                     begin
-				        xpos<=xpos+2; //change the amount you increment to make the speed faster 
+				        xpos<=xpos+1; //change the amount you increment to make the speed faster 
 			        end
 			        else if(Left) 
                     begin
-				        xpos<=xpos-2;
+				        xpos<=xpos-1;
 			        end
                     else if(Up) begin
-                        ypos<=ypos-2;
+                        ypos<=ypos-1;
                     end
                     else if(Down) begin
-                        ypos<=ypos+2;
+                        ypos<=ypos+1;
                     end
-                    if (wall_flag)
+                    if (wall_flag_vga)
                         begin
                             xpos <= xcheck;
                             ypos <= ycheck;
-                            wall_flag <= 0;
+                            wall_flag_sm <= 1;
                         end
+                    //check for wall_flag_vga 
+                    if (~wall_flag_vga)
+                        wall_flag_sm <= 0;
                     if (block_fill && coin)
                     begin
                         score <= score + 1;
