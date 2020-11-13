@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 
 module maze_controller(
+        input clk,
         input move_clk,
         input bright,
         input Up, Down, Left, Right, Reset,
@@ -9,6 +10,8 @@ module maze_controller(
         output reg [11:0] rgb
     );
 
+    wire coin;
+    wire wall;
     wire in_maze;
     wire print_start;
     wire print_finish;
@@ -41,6 +44,7 @@ module maze_controller(
     reg [9:0] xcoin [0:3];
     reg [9:0] ycoin [0:3];
     reg coin_flag;
+    reg wall_flag;
 
     //register for states
     reg [2:0] state;
@@ -50,6 +54,8 @@ module maze_controller(
 
     initial begin
         background = RED;
+        wall_flag = 0;
+        coin_flag = 0;
         //initialize counters
         main_row = 4'b0000;
         main_col = 6'b111011;
@@ -83,16 +89,28 @@ module maze_controller(
     end
 
     // print maze
-    always @(posedge move_clk)
+    always @(posedge clk)
     begin
         if(~bright)
             rgb = BLACK;
-        else if (block_fill)
-            rgb = BLUE;
+        
         else if(in_maze)
         begin
             rgb = WHITE; // let this be overwritten if a wall
-            if (print_start)
+            if (block_fill)
+            begin
+                if (wall)
+                    wall_flag = 1;
+                rgb = BLUE;
+            end
+            else if (coin)
+            begin
+                if (coin_flag == 1)
+                    rgb <= WHITE;
+                else
+                    rgb = GOLD;
+            end
+            else if (print_start)
                 rgb = RED;
             else if (print_finish)
                 rgb = GREEN;
@@ -119,13 +137,6 @@ module maze_controller(
                 end
             end
         end
-        else if (coin)
-            begin
-                if (coin_flag == 1)
-                    rgb <= WHITE;
-                else
-                    rgb = GOLD;
-            end
         else
             rgb = background;
     end
@@ -179,10 +190,11 @@ module maze_controller(
                     else if(Down) begin
                         ypos<=ypos+2;
                     end
-                    if (block_fill && wall)
+                    if (wall_flag)
                         begin
                             xpos <= xcheck;
                             ypos <= ycheck;
+                            wall_flag <= 0;
                         end
                     if (block_fill && coin)
                     begin

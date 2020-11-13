@@ -64,7 +64,7 @@ module maze_top(
 
     //Instantiate modules
     display_controller dc(.clk(clk25), .hSync(hSync), .vSync(vSync), .bright(bright), .hCount(hc), .vCount(vc));
-    maze_controller mc(.move_clk(move_clk), .bright(bright), .hCount(hc), .vCount(vc), .rgb(rgb), .Right(BtnR), .Left(BtnL), .Reset(Reset), .Up(BtnU), .Down(BtnD), .score(score));
+    maze_controller mc(.clk(clk25), .move_clk(move_clk), .bright(bright), .hCount(hc), .vCount(vc), .rgb(rgb), .Right(BtnR), .Left(BtnL), .Reset(Reset), .Up(BtnU), .Down(BtnD), .score(score));
 
     //itialize
     initial begin
@@ -76,7 +76,7 @@ module maze_top(
     assign SSD3 = 4'b0000;
     assign SSD2 = 4'b0000;
     assign SSD1 = 4'b0000;
-    assign SSD0 = 4'b0100; //score;
+    assign SSD0 = score;
     assign {Ca, Cb, Cc, Cd, Ce, Cf, Cg, Dp} = {SSD_CATHODES};
 
     assign ssdscan_clk = DIV_CLK[19:18];
